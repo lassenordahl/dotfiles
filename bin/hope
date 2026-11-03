@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Usage: hope <image> [image...]
+# Adds images to github.com/lassenordahl/hope and rebuilds its README (images only, oldest first).
+set -euo pipefail
+REPO="${HOPE_DIR:-$HOME/hope}"
+[[ $# -gt 0 ]] || { echo "usage: hope <image> [image...]" >&2; exit 1; }
+[[ -d "$REPO/.git" ]] || git clone -q https://github.com/lassenordahl/hope "$REPO"
+
+git -C "$REPO" pull -q --rebase
+mkdir -p "$REPO/images"
+for f in "$@"; do
+  [[ -f "$f" ]] || { echo "not a file: $f" >&2; exit 1; }
+  ext="${f##*.}"; ext="$(echo "$ext" | tr '[:upper:]' '[:lower:]')"
+  name="$(date -u +%Y%m%d-%H%M%S)-$RANDOM.$ext"
+  cp "$f" "$REPO/images/$name"
+  echo "added images/$name"
+done
+
+cd "$REPO"
+: > README.md
+for img in $(ls images | sort); do printf '![](images/%s)\n\n' "$img" >> README.md; done
+git add -A
+git commit -q -m "add image"
+until git push -q 2>/dev/null; do git pull -q --rebase; done
+echo "https://github.com/lassenordahl/hope"

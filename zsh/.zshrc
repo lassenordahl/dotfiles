@@ -26,7 +26,7 @@ alias deploy-web="cd ~/dev/lassenordahl.com/apps/web && npm run build && wrangle
 alias dotsync="git -C ~/dotfiles pull --rebase && source ~/.zshrc"
 
 # pipx / local bins
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/dotfiles/bin"
 
 # Unity CLI (only if installed)
 [[ -f "$HOME/.unity/env" ]] && . "$HOME/.unity/env"

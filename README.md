@@ -24,6 +24,10 @@ git clone https://github.com/lassenordahl/fonts ~/fonts && ~/fonts/install.sh
 
 On WSL this also installs it on Windows and sets Windows Terminal to use it.
 
+## hope
+
+`hope <image>...` adds images to the public [hope](https://github.com/lassenordahl/hope) repo and rebuilds its README (images only, in order).
+
 ## Keeping in sync
 
 Files in `~` are symlinks into this repo, so editing `~/.zshrc` edits the repo.
