@@ -8,10 +8,12 @@ REPO="${HOPE_DIR:-$HOME/hope}"
 
 git -C "$REPO" pull -q --rebase
 mkdir -p "$REPO/images"
+i=0
 for f in "$@"; do
+  i=$((i+1))
   [[ -f "$f" ]] || { echo "not a file: $f" >&2; exit 1; }
   ext="${f##*.}"; ext="$(echo "$ext" | tr '[:upper:]' '[:lower:]')"
-  name="$(date -u +%Y%m%d-%H%M%S)-$RANDOM.$ext"
+  name="$(date -u +%Y%m%d-%H%M%S)-$(printf %02d $i)-$RANDOM.$ext"
   cp "$f" "$REPO/images/$name"
   echo "added images/$name"
 done
@@ -19,6 +21,7 @@ done
 cd "$REPO"
 : > README.md
 for img in $(ls images | sort); do printf '![](images/%s)\n\n' "$img" >> README.md; done
+rm -f images/.gitkeep
 git add -A
 git commit -q -m "add image"
 until git push -q 2>/dev/null; do git pull -q --rebase; done
