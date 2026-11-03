@@ -2,9 +2,9 @@
 # Usage: hope <image> [image...]
 # Adds images to github.com/lassenordahl/hope and rebuilds its README (images only, oldest first).
 set -euo pipefail
-REPO="${HOPE_DIR:-$HOME/hope}"
+REPO="${HOPE_DIR:-$HOME/dev/hope}"
 [[ $# -gt 0 ]] || { echo "usage: hope <image> [image...]" >&2; exit 1; }
-[[ -d "$REPO/.git" ]] || git clone -q https://github.com/lassenordahl/hope "$REPO"
+[[ -d "$REPO/.git" ]] || { mkdir -p "$(dirname "$REPO")"; git clone -q https://github.com/lassenordahl/hope "$REPO"; }
 
 git -C "$REPO" pull -q --rebase
 mkdir -p "$REPO/images"
