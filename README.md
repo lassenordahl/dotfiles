@@ -13,6 +13,17 @@ git clone https://github.com/lassenordahl/dotfiles ~/dotfiles
 chsh -s "$(which zsh)"   # if zsh isn't already your shell
 ```
 
+## Font
+
+Terminal font is Berkeley Mono, kept in a separate **private** repo (licensed):
+
+```sh
+gh auth login   # needed to clone the private repo
+git clone https://github.com/lassenordahl/fonts ~/fonts && ~/fonts/install.sh
+```
+
+On WSL this also installs it on Windows and sets Windows Terminal to use it.
+
 ## Keeping in sync
 
 Files in `~` are symlinks into this repo, so editing `~/.zshrc` edits the repo.
