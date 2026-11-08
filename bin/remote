@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# remote: open Claude on the desktop PC over SSH (Tailscale), resuming the
+# latest session there. The PC provides `claude-remote` on its PATH.
+exec ssh -t desktop claude-remote "$@"

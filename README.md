@@ -41,3 +41,9 @@ Not tracked, so put per-machine stuff here:
 
 - `~/.zshrc.local`: extra PATHs, machine-only aliases
 - `~/.gitconfig.local`: credential helpers etc.
+
+## remote (desktop PC)
+
+`remote` SSHes into the desktop PC (`Host desktop` in `~/.ssh/config`, over Tailscale) and runs
+`claude-remote` there, which opens Claude in the Derailed checkout and resumes the latest session.
+`ssh/authorized_keys` holds the public keys allowed in (public keys only, never private ones).
