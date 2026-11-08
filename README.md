@@ -46,4 +46,5 @@ Not tracked, so put per-machine stuff here:
 
 `remote` SSHes into the desktop PC (`Host desktop` in `~/.ssh/config`, over Tailscale) and runs
 `claude-remote` there, which opens Claude in the Derailed checkout and resumes the latest session.
+The PC is Windows (Derailed lives at `D:\dev`), so its `claude-remote` is `windows/claude-remote.cmd`, copied into `%USERPROFILE%\.local\bin`; it runs in `D:\dev` unless `CLAUDE_REMOTE_DIR` is set.
 `ssh/authorized_keys` holds the public keys allowed in (public keys only, never private ones).
